@@ -9,6 +9,10 @@ function Book(title, author, numberOfPages, status) {
 }
 
 let myLibrary = [];
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const numberOfPages = document.querySelector('#pages-number');
+const bookStatus = document.querySelector('#status');    
 
 function addBookToLibrary(title, author, numberOfPages, status) {
 
@@ -59,13 +63,42 @@ function displayBooks() {
 }
 
 const form = document.querySelector('form').addEventListener('submit', (e) => {
-    const title = document.querySelector('#title');
-    const author = document.querySelector('#author');
-    const numberOfPages = document.querySelector('#pages-number');
-    const bookStatus = document.querySelector('#status');
-    const addBookBtn = document.querySelector('button');
-    
     e.preventDefault();
     addBookToLibrary(title.value, author.value, numberOfPages.value, bookStatus.value);
     displayBooks();
 });
+
+const openPopupButton = document.querySelector('#add-book');
+const closePopupButton = document.querySelector('#submit-button');
+const overlay = document.querySelector('#overlay');
+
+openPopupButton.addEventListener('click', () => {
+    const popup = document.querySelector('.popup');
+    openPopup(popup);
+});
+
+closePopupButton.addEventListener('click', () => {
+    const popup = document.querySelector('.popup');
+    if (title.value && author.value && numberOfPages.value && bookStatus.value) {
+        closePopup(popup);
+    }
+});
+
+overlay.addEventListener('click', () => {
+    const popups = document.querySelectorAll('.popup.active');
+    popups.forEach(popup => {
+        closePopup(popup);
+    });
+});
+
+function openPopup(popup) {
+    if (popup == null) return;
+    popup.classList.add('active');
+    overlay.classList.add('active');
+}
+
+function closePopup(popup) {
+    if (popup == null) return;  
+    popup.classList.remove('active');
+    overlay.classList.remove('active');
+}
