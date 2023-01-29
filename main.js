@@ -39,11 +39,16 @@ function displayBooks() {
         bookDiv.appendChild(numberOfPages);
         const statusBtn = document.createElement('button');
         statusBtn.textContent = myLibrary[i].status;
+        if (statusBtn.textContent === 'Not read') {
+            statusBtn.style.backgroundColor = 'red'
+        }
         statusBtn.addEventListener('click', () => {
             if (statusBtn.textContent === 'Read') {
                 statusBtn.textContent = 'Not read';
+                statusBtn.style.backgroundColor = '#ef4444';
             } else {
                 statusBtn.textContent = 'Read';
+                statusBtn.style.background = '#fdba74';
             }
         });
         bookDiv.appendChild(statusBtn);

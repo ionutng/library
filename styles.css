@@ -8,7 +8,7 @@ body {
 }
 
 header, footer {
-    background-color: #cbd5e1;
+    background-color: #fed7aa;
     display: flex;
     align-items: center;
     padding-left: 64px;
@@ -41,11 +41,16 @@ img {
 button {
     width: 100px;
     height: 35px;
-    background-color: #38bdf8;
-    border: 1px solid #0891b2;
+    background-color: #fdba74;
+    border: 1px solid #b88248;
     border-radius: 8px;
     cursor: pointer;
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    background-color: #b88248;
 }
 
 input, label {
@@ -112,7 +117,7 @@ input {
 }
 
 .book {
-    border: 2px solid #64748b;
+    border: 2px solid #E9C1AF;
     border-radius: 16px;
     width: 300px;
     height: 300px;
