@@ -3,7 +3,7 @@ body {
     display: grid;
     min-height: 100vh;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-rows: 100px 1fr 100px;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -100,4 +100,31 @@ input {
 #overlay.active {
     opacity: 1;
     pointer-events: all;
+}
+
+.books {
+    margin-top: 16px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.book {
+    border: 2px solid #64748b;
+    border-radius: 16px;
+    width: 300px;
+    height: 300px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.book button {
+    margin-bottom: 16px;
 }

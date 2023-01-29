@@ -1,3 +1,9 @@
+let myLibrary = [];
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const numberOfPages = document.querySelector('#pages-number');
+const bookStatus = document.querySelector('#status');  
+
 function Book(title, author, numberOfPages, status) {
     this.title = title;
     this.author = author;
@@ -6,38 +12,48 @@ function Book(title, author, numberOfPages, status) {
     this.info = function() {
         return `${title} by ${author}, ${numberOfPages} pages, ${status}`;
     };
-}
-
-let myLibrary = [];
-const title = document.querySelector('#title');
-const author = document.querySelector('#author');
-const numberOfPages = document.querySelector('#pages-number');
-const bookStatus = document.querySelector('#status');    
+}  
 
 function addBookToLibrary(title, author, numberOfPages, status) {
 
     const book = new Book(title, author, numberOfPages, status);
     myLibrary.push(book);
-    console.log(myLibrary);
 }
 
 function displayBooks() {
-    const booksDiv = document.querySelector('.books');
-    booksDiv.textContent = '';
+    const books = document.querySelector('.books');
+    books.textContent = '';
 
     for (let i = 0; i < myLibrary.length; i++) {
+        const bookDiv = document.createElement('div');
+        bookDiv.classList.add('book');
+        books.appendChild(bookDiv);
         const bookTitle = document.createElement('p');
-        bookTitle.textContent = myLibrary[i].title;
-        booksDiv.appendChild(bookTitle);
+        bookTitle.textContent = `Title: ${myLibrary[i].title}`;
+        bookDiv.appendChild(bookTitle);
         const bookAuthor = document.createElement('p');
-        bookAuthor.textContent = myLibrary[i].author;
-        booksDiv.appendChild(bookAuthor);
+        bookAuthor.textContent = `Author: ${myLibrary[i].author}`;
+        bookDiv.appendChild(bookAuthor);
         const numberOfPages = document.createElement('p');
-        numberOfPages.textContent = myLibrary[i].numberOfPages;
-        booksDiv.appendChild(numberOfPages);
-        const status = document.createElement('p');
-        status.textContent = myLibrary[i].status;
-        booksDiv.appendChild(status);
+        numberOfPages.textContent = myLibrary[i].numberOfPages + ' pages';
+        bookDiv.appendChild(numberOfPages);
+        const statusBtn = document.createElement('button');
+        statusBtn.textContent = myLibrary[i].status;
+        statusBtn.addEventListener('click', () => {
+            if (statusBtn.textContent === 'Read') {
+                statusBtn.textContent = 'Not read';
+            } else {
+                statusBtn.textContent = 'Read';
+            }
+        });
+        bookDiv.appendChild(statusBtn);
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = 'Remove';
+        removeBtn.addEventListener('click', () => {
+            myLibrary.splice(bookDiv, 1);
+            books.removeChild(bookDiv);
+        });
+        bookDiv.appendChild(removeBtn);
     }
 
     // Display the books in a table
@@ -65,6 +81,10 @@ function displayBooks() {
 const form = document.querySelector('form').addEventListener('submit', (e) => {
     e.preventDefault();
     addBookToLibrary(title.value, author.value, numberOfPages.value, bookStatus.value);
+    title.value = '';
+    author.value = '';
+    numberOfPages.value = '';
+    bookStatus.value = 'Read';
     displayBooks();
 });
 
